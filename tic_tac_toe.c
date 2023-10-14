@@ -22,7 +22,7 @@ void displayBoard() {
         for (int j = 0; j < 3; j++) {
             printf("%c", board[i][j]); // print the board 
             if (j != 2){ // if we are not at the end of the row
-                printf("|"); // print the vertical lines
+                printf(" | "); // print the vertical lines
             }
         }
         printf("\n"); // print the horizontal lines
