@@ -10,7 +10,7 @@ char board[3][3];
 //initialize the board with empty spaces to start
 void initializeBoard() { // no board is passed in because we are using the global board
     for (int i = 0; i < 3; i++ ){
-        for (int j = 0; i < 3; j++) {
+        for (int j = 0; j < 3; j++) {
             board[i][j] = ' ';
         }
     }
@@ -19,7 +19,7 @@ void initializeBoard() { // no board is passed in because we are using the globa
 // display the board
 void displayBoard() {
     for (int i = 0; i < 3; i++) {
-        for (int j = 0; i < 3; j++) {
+        for (int j = 0; j < 3; j++) {
             printf("%c", board[i][j]); // print the board 
             if (j != 2){ // if we are not at the end of the row
                 printf("|"); // print the vertical lines
@@ -71,7 +71,7 @@ bool checkWin(char player) {
 bool isDraw() {
     // check if the board is full
     for (int i = 0; i < 3; i++){
-        for (int j = 0; i < 3; j++){
+        for (int j = 0; j < 3; j++){
             if (board[i][j] == ' ') { // if there is an empty space
                 return false; // the game is not a draw
             }
