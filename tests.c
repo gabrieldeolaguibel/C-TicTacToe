@@ -32,7 +32,7 @@ int main() {
     if (NULL == suite) {
        CU_cleanup_registry();
        return CU_get_error();
-
+    }
     // add the test funtin to the suite
     if (NULL == CU_add_test(suite, "Test isValidMove function", test_isValidMove)) {
         CU_cleanup_registry(); 
@@ -47,6 +47,3 @@ int main() {
     return CU_get_error();
 
 }
-
-
-        
