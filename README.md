@@ -80,16 +80,6 @@ Run
 print board
 ```
 
-### Continue Code Execution
-```bash
-c
-```
-
-### Quit Debugger
-```bash
-q
-```
-
 ## License
 
 This project is open source. Feel free to fork, modify, and use in your projects.
