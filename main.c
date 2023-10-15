@@ -33,15 +33,15 @@ int main() {
         // check if the move is valid
         if (isValidMove(row, column)) {
             board[row][column] = currentPlayer; // update the board with the current player's move
-            // check if the current player has won
+            //  check if the current player has won
             if (checkWin(currentPlayer)) {
-                displayBoard();
+                displayBoard(); //(SET BREAKPOINT):
                 printf("Player %c has won!\n", currentPlayer);
                 break; // break out of the loop
             }
-            // check if the game is a draw
+            //  check if the game is a draw
             if (isDraw()) {
-                displayBoard();
+                displayBoard(); //(SET BREAKPOINT):
                 printf("The game is a draw!\n");
                 break; // break out of the loop
             }

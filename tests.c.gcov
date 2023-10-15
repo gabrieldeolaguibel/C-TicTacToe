@@ -1,0 +1,113 @@
+        -:    0:Source:tests.c
+        -:    0:Graph:tests.gcno
+        -:    0:Data:tests.gcda
+        -:    0:Runs:1
+        -:    0:Programs:1
+        -:    1:// This will contain the test suite using CUnit.
+        -:    2:#include <stdio.h>
+        -:    3:#include <CUnit/Basic.h>
+        -:    4:#include "tic_tac_toe.c" // allow it to access functions and code
+        -:    5:
+        -:    6:// test funtion for isValidMove function from tic_tac_toe.c
+        1:    7:void test_isValidMove(){
+        1:    8:    initializeBoard();
+        -:    9:    // add some moves to the board
+        1:   10:    board[0][0] = 'X'; // top left corner
+        1:   11:    board[1][1] = 'O'; // middle
+        -:   12:
+        -:   13:    // test if the ocupied cell is recognized as invalid
+        1:   14:    CU_ASSERT_FALSE(isValidMove(0, 0));
+        1:   15:    CU_ASSERT_FALSE(isValidMove(1, 1));
+        -:   16:
+        -:   17:    // test if the empty cell is recognized as valid
+        1:   18:    CU_ASSERT_TRUE(isValidMove(0, 1));
+        1:   19:    CU_ASSERT_TRUE(isValidMove(2, 2));
+        -:   20:
+        -:   21:    // test if the cell outside the board is recognized as invalid
+        1:   22:    CU_ASSERT_FALSE(isValidMove(4, 4)); 
+        1:   23:}
+        -:   24:
+        -:   25:// tes for checkWin function from tic_tac_toe.c
+        1:   26:void test_checkWin(){
+        -:   27:    // test win condition for rows
+        1:   28:    initializeBoard();
+        1:   29:    board[0][0] = 'X';
+        1:   30:    board[0][1] = 'X';
+        1:   31:    board[0][2] = 'X';
+        1:   32:    CU_ASSERT_TRUE(checkWin('X'));
+        1:   33:    CU_ASSERT_FALSE(checkWin('O'))
+        -:   34:
+        -:   35:    // test win condition for columns
+        1:   36:    initializeBoard();
+        1:   37:    board[0][0] = 'O';
+        1:   38:    board[1][0] = 'O';
+        1:   39:    board[2][0] = 'O';
+        1:   40:    CU_ASSERT_TRUE(checkWin('O'));
+        1:   41:    CU_ASSERT_FALSE(checkWin('X'));
+        -:   42:
+        -:   43:    // Test win condition for diagonals
+        1:   44:    initializeBoard();
+        1:   45:    board[0][0] = 'X';
+        1:   46:    board[1][1] = 'X';
+        1:   47:    board[2][2] = 'X';
+        1:   48:    CU_ASSERT_TRUE(checkWin('X'));
+        1:   49:    CU_ASSERT_FALSE(checkWin('O'));
+        -:   50:
+        1:   51:    initializeBoard();
+        1:   52:    board[0][2] = 'O';
+        1:   53:    board[1][1] = 'O';
+        1:   54:    board[2][0] = 'O';
+        1:   55:    CU_ASSERT_TRUE(checkWin('O'));
+        1:   56:    CU_ASSERT_FALSE(checkWin('X'));
+        -:   57:
+        1:   58:}
+        -:   59:
+        -:   60:// test for draw
+        1:   61:void test_isDraw(){
+        1:   62:    initializeBoard();
+        -:   63:    // no draw
+        1:   64:    board[0][0] = 'X';
+        1:   65:    CU_ASSERT_FALSE(isDraw());
+        -:   66:
+        -:   67:    // yes draw
+        1:   68:    char draw[3][3] = {
+        -:   69:        {'X', 'O', 'X'},
+        -:   70:        {'X', 'X', 'O'},
+        -:   71:        {'O', 'X', 'O'}
+        -:   72:    };
+        -:   73:    // Add the marks to the board
+        4:   74:    for (int i = 0; i < 3; i++){
+       12:   75:        for (int j = 0; j < 3; j++){
+        9:   76:            board[i][j] = draw[i][j];
+        9:   77:        }
+        3:   78:    }
+        1:   79:    CU_ASSERT_TRUE(isDraw());
+        1:   80:}
+        -:   81:
+        1:   82:int main() {
+        -:   83:    // Initialize CUnit test registry
+        1:   84:    if (CUE_SUCCESS != CU_initialize_registry()) {
+    #####:   85:        return CU_get_error();
+        -:   86:    }
+        -:   87:    // Add test suite to registry
+        1:   88:    CU_pSuite suite = CU_add_suite("Suite", NULL, NULL);
+        1:   89:    if (NULL == suite) {
+    #####:   90:       CU_cleanup_registry();
+    #####:   91:       return CU_get_error();
+        -:   92:    }
+        -:   93:    // add the test funtin to the suite
+        2:   94:    if (NULL == CU_add_test(suite, "Test isValidMove function", test_isValidMove) ||
+        1:   95:        NULL == CU_add_test(suite, "Test Check win function", test_checkWin) ||
+        1:   96:        NULL == CU_add_test(suite, "Test the draw function", test_isDraw)) {
+    #####:   97:        CU_cleanup_registry(); 
+    #####:   98:        return CU_get_error();
+        -:   99:    }
+        -:  100:    // Set up the basic run mode and run the tests
+        1:  101:    CU_basic_set_mode(CU_BRM_VERBOSE);
+        1:  102:    CU_basic_run_tests();
+        -:  103:
+        -:  104:    // Clean up the test registry
+        1:  105:    CU_cleanup_registry();
+        1:  106:    return CU_get_error();
+        -:  107:
+        1:  108:}
