@@ -84,10 +84,11 @@ bool isDraw() {
 // Extra Credit?
 
  //function to save the current state of the game so that it is possible to recover it later
+ // we learned this in the last session
 void saveGameState(char currentPlayer) {
-    FILE *file = fopen("gamestate.txt", "w");
-    if (file == NULL) {
-        printf("Error saving game state.\n");
+    FILE *file = fopen("gamestate.txt", "w"); // open the file in write mode so that it can recieve the game information
+    if (file == NULL) { 
+        printf("File not find\n");
         return;
     }
 
@@ -96,35 +97,11 @@ void saveGameState(char currentPlayer) {
         for (int j = 0; j < 3; j++) {
             fprintf(file, "%c", board[i][j]);
         }
-        fprintf(file, "\n");
+        fprintf(file, "\n"); // print a new line after each row
     }
     
     // Save the current player
     fprintf(file, "%c", currentPlayer);
 
     fclose(file);
-}
-
-
-// function to load the game back in from a save]
-char loadGameState() {
-    FILE *file = fopen("gamestate.txt", "r");
-    if (file == NULL) {
-        printf("Error loading game state.\n");
-        return ' '; // Error indicator
-    }
-
-    // Load the board
-    for (int i = 0; i < 3; i++) {
-        for (int j = 0; j < 3; j++) {
-            fscanf(file, " %c", &board[i][j]);
-        }
-    }
-
-    char currentPlayer;
-    // Load the current player
-    fscanf(file, " %c", &currentPlayer);
-
-    fclose(file);
-    return currentPlayer;
 }
