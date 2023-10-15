@@ -1,8 +1,8 @@
         -:    0:Source:./tic_tac_toe.c
         -:    0:Graph:tests.gcno
         -:    0:Data:tests.gcda
-        -:    0:Runs:1
-        -:    0:Programs:1
+        -:    0:Runs:0
+        -:    0:Programs:0
         -:    1:# include <stdio.h>
         -:    2:# include <stdlib.h>
         -:    3:# include <stdbool.h>
@@ -13,13 +13,13 @@
         -:    8:char board[3][3];
         -:    9:
         -:   10://initialize the board with empty spaces to start
-        1:   11:void initializeBoard() { // no board is passed in because we are using the global board
-        4:   12:    for (int i = 0; i < 3; i++ ){
-       12:   13:        for (int j = 0; j < 3; j++) {
-        9:   14:            board[i][j] = ' ';
-        9:   15:        }
-        3:   16:    }
-        1:   17:}
+        6:   11:void initializeBoard() { // no board is passed in because we are using the global board
+       24:   12:    for (int i = 0; i < 3; i++ ){
+       72:   13:        for (int j = 0; j < 3; j++) {
+       54:   14:            board[i][j] = ' ';
+       54:   15:        }
+       18:   16:    }
+        6:   17:}
         -:   18:
         -:   19:// display the board
     #####:   20:void displayBoard() {
@@ -38,39 +38,39 @@
     #####:   33:}
         -:   34:
         -:   35:// check if the move is valid
-        5:   36:bool isValidMove(int row, int column) {
-        5:   37:    return (
-        5:   38:            row >= 0 // if the row is greater than or equal to 0 and 
-        5:   39:            && row < 3 // less than 3 and
-        5:   40:            && column >= 0 // the column is greater than or equal to 0 and
-        4:   41:            && column < 3 // less than 3 and
-        4:   42:            && board[row][column] == ' '); // the board at the row and column is empty
+       10:   36:bool isValidMove(int row, int column) {
+       10:   37:    return (
+       10:   38:            row >= 0 // if the row is greater than or equal to 0 and 
+       10:   39:            && row < 3 // less than 3 and
+       10:   40:            && column >= 0 // the column is greater than or equal to 0 and
+        8:   41:            && column < 3 // less than 3 and
+        8:   42:            && board[row][column] == ' '); // the board at the row and column is empty
         -:   43:            // if all these conditions are true, then the move is valid becuase it is within the bounds of the board and the space is empty
         -:   44:}
         -:   45:
         -:   46:// Check if someone has won
-    #####:   47:bool checkWin(char player) {
+        8:   47:bool checkWin(char player) {
         -:   48:    // check the rows and columns
-    #####:   49:    for (int i = 0; i < 3; i++) {
+       26:   49:    for (int i = 0; i < 3; i++) {
         -:   50:        // check the rows
-    #####:   51:        if (board[i][0] == player && board[i][1] == player && board[i][2] == player) { // check the rows
-    #####:   52:            return true;
+       20:   51:        if (board[i][0] == player && board[i][1] == player && board[i][2] == player) { // check the rows
+        1:   52:            return true;
         -:   53:        }
         -:   54:        // check the columns
-    #####:   55:        if (board[0][i] == player && board[1][i] == player && board[2][i] == player) { // check the columns
-    #####:   56:            return true;
+       19:   55:        if (board[0][i] == player && board[1][i] == player && board[2][i] == player) { // check the columns
+        1:   56:            return true;
         -:   57:        }
-    #####:   58:    }
+       18:   58:    }
         -:   59:    // check the positive slope diagonal
-    #####:   60:    if (board[0][0] == player && board[1][1] == player && board[2][2] == player) {
-    #####:   61:        return true;
+        6:   60:    if (board[0][0] == player && board[1][1] == player && board[2][2] == player) {
+        1:   61:        return true;
         -:   62:    }
         -:   63:    // check the negative slope diagonal
-    #####:   64:    if (board[0][2] == player && board[1][1] == player && board[2][0] == player) {
-    #####:   65:        return true;
+        5:   64:    if (board[0][2] == player && board[1][1] == player && board[2][0] == player) {
+        1:   65:        return true;
         -:   66:    }
-    #####:   67:    return false; // no win
-    #####:   68:}
+        4:   67:    return false; // no win
+        8:   68:}
         -:   69:
         -:   70:// check if the game is a draw
     #####:   71:bool isDraw() {
