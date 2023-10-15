@@ -57,6 +57,28 @@ void test_checkWin(){
 
 }
 
+// test for draw
+void test_isDraw(){
+    initializeBoard();
+    // no draw
+    board[0][0] = 'X';
+    CU_ASSERT_FALSE(isDraw());
+
+    // yes draw
+    char draw[3][3] = {
+        {'X', 'O', 'X'},
+        {'X', 'X', 'O'},
+        {'O', 'X', 'O'}
+    };
+    // Add the marks to the board
+    for (int i = 0; i < 3; i++){
+        for (int j = 0; j < 3; j++){
+            board[i][j] = draw[i][j];
+        }
+    }
+    CU_ASSERT_TRUE(isDraw());
+}
+
 int main() {
     // Initialize CUnit test registry
     if (CUE_SUCCESS != CU_initialize_registry()) {
@@ -70,7 +92,8 @@ int main() {
     }
     // add the test funtin to the suite
     if (NULL == CU_add_test(suite, "Test isValidMove function", test_isValidMove) ||
-        NULL == CU_add_test(suite, "Test Check win function", test_checkWin)) {
+        NULL == CU_add_test(suite, "Test Check win function", test_checkWin) ||
+        NULL == CU_add_test(suite, "Test the draw function", test_isDraw)) {
         CU_cleanup_registry(); 
         return CU_get_error();
     }
